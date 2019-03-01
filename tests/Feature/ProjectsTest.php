@@ -16,7 +16,7 @@ class ProjectsTest extends TestCase
 
     /** @test
      *
-     * TO RUN TEST: c */
+     * TO RUN TEST: vendor/bin/phpunit tests/Feature/ProjectsTest.php */
 
     // Test to make sure a user can create a project
     public function a_user_can_create_a_project()
@@ -41,7 +41,7 @@ class ProjectsTest extends TestCase
         // Make sure that database has a table called projects and can accept the data
         $this->assertDatabaseHas('projects', $attributes);
 
-        // Get request to /projects to assert that a project with a title is on the page
+        // Get request to /projects to assert that a project with a title is present on the view
         $this->get('/projects')->assertSee($attributes['title']);
     }
 }
