@@ -13,16 +13,28 @@
 |
 */
 
+// HTTP url request to homepage
 Route::get('/', function () {
     return view('welcome');
 });
 
+// HTTP Get request - Respond to get request to fetch or show a project(s)
+Route::get('/projects', function () {
+
+    // Fetch all products from database and save them into the $projects variable
+    $projects = App\Project::all();
+
+    // Return projects view and pass in the $projects data to be used in the browser with compact()
+    return view('projects.index', compact('projects'));
+});
+
+// HTTP Post request - Respond to a post request to create a project(s)
 Route::post('/projects', function () {
 
-    // Validate
+    // Validate data
 
-    //  Persist
-    App\Project::create(request(['title', 'description']));
+    // Persist data (save it to the DB)
+    App\Project::create(request(['title', 'description'])); // Fetch data from Project Model
 
-    // Redirect
+    // Redirect page
 });
