@@ -44,4 +44,30 @@ class ProjectsTest extends TestCase
         // Get request to /projects to assert that a project with a title is present on the view
         $this->get('/projects')->assertSee($attributes['title']);
     }
+
+    /** @test
+     *
+     * TO RUN TEST: vendor/bin/phpunit --filter a_project_requires_a_title */
+
+    // Test to make sure that a created project has a title
+    public function a_project_requires_a_title()
+    {
+        // Overide attributes to make title an empty string so a validation error occurs (this stops other validation issues conflicting with this test)
+        $attributes = factory('App\Project')->raw(['title' => '']);
+
+        $this->post('/projects', $attributes)->assertSessionHasErrors('title');
+    }
+
+    /** @test
+     *
+     * TO RUN TEST: pf ProjectsTest */
+
+    // Test to make sure that a created project has a description
+    public function a_project_requires_a_description()
+    {
+        // Overide attributes to make title an empty string so a validation error occurs
+        $attributes = factory('App\Project')->raw(['description' => '']);
+
+        $this->post('/projects', $attributes)->assertSessionHasErrors('description');
+    }
 }

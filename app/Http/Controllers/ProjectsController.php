@@ -19,7 +19,8 @@ class ProjectsController extends Controller
 
     public function store()
     {
-        // Validate data
+        // Validation
+        request()->validate(['title' => 'required', 'description' => 'required']); // Make sure the title field is enterd
 
         // Persist data (save it to the DB)
         Project::create(request(['title', 'description'])); // Fetch data from Project Model
