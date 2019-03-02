@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
 {
-    //
-
     public function index()
     {
         // Fetch all products from database and save them into the $projects variable

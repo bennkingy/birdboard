@@ -36,7 +36,7 @@ class ProjectsTest extends TestCase
         ];
 
         // Post request to create a project with the data and then redirect a user to a page
-        $this->post('/projects', $attributes->assertRedirect('/projects'));
+        $this->post('/projects', $attributes)->assertRedirect('/projects');
 
         // Make sure that database has a table called projects and can accept the data
         $this->assertDatabaseHas('projects', $attributes);
