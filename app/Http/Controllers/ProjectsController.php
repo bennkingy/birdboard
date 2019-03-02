@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
 {
+    // Direct user to the projects homepage and pass in any projects
     public function index()
     {
         // Fetch all products from database and save them into the $projects variable
@@ -17,6 +18,7 @@ class ProjectsController extends Controller
         return view('projects.index', compact('projects'));
     }
 
+    // Store product into DB
     public function store()
     {
         // REFRACTOR - Validation
@@ -33,5 +35,15 @@ class ProjectsController extends Controller
 
         // Redirect page
         return redirect('/projects');
+    }
+
+    // Fetch product from DB and direct user to that page
+    public function show()
+    {
+        // Fetch / find a single product equal to the project id from the url (check web.php)
+        $project = Project::findOrFail(request('project'));
+
+        // Returns the projects show view
+        return view('projects.show', compact('project'));
     }
 }

@@ -70,4 +70,21 @@ class ProjectsTest extends TestCase
 
         $this->post('/projects', $attributes)->assertSessionHasErrors('description');
     }
+
+    /** @test */
+
+    // Given a project is available, make sure the user has access to view it on a page
+    public function a_user_can_view_a_project()
+    {
+        // Enable better debugging
+        $this->withoutExceptionHandling();
+
+        // Create a project using the factory class
+        $project = factory('App\Project')->create();
+
+        // If I make get request to fetch a proect make sure the project title and description is on the page
+        $this->get('/projects/' . $project->id)
+            ->assertSee($project->title)
+            ->assertSee($project->description);
+    }
 }

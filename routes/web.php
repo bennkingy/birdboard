@@ -18,9 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// HTTP url request to projects page
 Route::get('/projects', 'ProjectsController@index');
 
+// HTTP post request to store a new project into the DB
 Route::post('/projects', 'ProjectsController@store');
+
+// HTTP get request to fetch and show on the page a unique/single project from the DB
+Route::get('/projects/{project}', 'ProjectsController@show');
 
 // *** CREATED PROJECT CONTROLLER TO HANDLE THE HTTP REQUESTS BELOW - SEE ABOVE ^
 // // HTTP Get request - Respond to get request to fetch or show a project(s)
