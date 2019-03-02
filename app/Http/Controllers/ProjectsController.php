@@ -19,11 +19,17 @@ class ProjectsController extends Controller
 
     public function store()
     {
-        // Validation
-        request()->validate(['title' => 'required', 'description' => 'required']); // Make sure the title field is enterd
+        // REFRACTOR - Validation
+        $attributes = request()->validate(['title' => 'required', 'description' => 'required']);
 
-        // Persist data (save it to the DB)
-        Project::create(request(['title', 'description'])); // Fetch data from Project Model
+        // REFRACTOR - Persist/save data (save it to the DB)
+        Project::create($attributes);
+
+        // // Validation
+        // request()->validate(['title' => 'required', 'description' => 'required']); // Make sure the title field is enterd
+
+        // // Persist/save data (save it to the DB)
+        // Project::create(request(['title', 'description'])); // Fetch data from Project Model
 
         // Redirect page
         return redirect('/projects');
