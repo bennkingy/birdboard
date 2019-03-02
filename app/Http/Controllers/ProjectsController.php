@@ -22,7 +22,10 @@ class ProjectsController extends Controller
     public function store()
     {
         // REFRACTOR - Validation
-        $attributes = request()->validate(['title' => 'required', 'description' => 'required']);
+        $attributes = request()->validate([
+            'title' => 'required',
+            'description' => 'required'
+        ]);
 
         // REFRACTOR - Persist/save data (save it to the DB)
         Project::create($attributes);
