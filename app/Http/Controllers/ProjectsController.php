@@ -37,13 +37,18 @@ class ProjectsController extends Controller
         return redirect('/projects');
     }
 
-    // Fetch product from DB and direct user to that page
-    public function show()
+    // Refractor of show method to use route model binding
+    public function show(Project $project)
     {
-        // Fetch / find a single product equal to the project id from the url (check web.php)
-        $project = Project::findOrFail(request('project'));
-
-        // Returns the projects show view
         return view('projects.show', compact('project'));
     }
+    // // Fetch product from DB and direct user to that page - Refactored above
+    // public function show()
+    // {
+    //     // Fetch / find a single product equal to the project id from the url (check web.php)
+    //     $project = Project::findOrFail(request('project'));
+
+    //     // Returns the projects show view
+    //     return view('projects.show', compact('project'));
+    // }
 }

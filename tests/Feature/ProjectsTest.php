@@ -73,7 +73,7 @@ class ProjectsTest extends TestCase
 
     /** @test */
 
-    // Given a project is available, make sure the user has access to view it on a page
+    // Given a project is available, make sure the user has can view it
     public function a_user_can_view_a_project()
     {
         // Enable better debugging
