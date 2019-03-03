@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html>
+<!-- View extends layouts/app.blade.php -->
+@extends ('layouts.app')
+@section('content')
 
-<head>
+    <div style="display:flex; align-items:center;">
 
-<title>Projects</title>
+        <h1 style="margin-right:auto;">Birdboard</h1>
 
-</head>
-
-<body>
-
-    <h1>Birdboard</h1>
+        <a href="/projects/create">Create project</a>
     
+    </div>
+
     <ul>
         <!-- forelse is a foreach but returns empty if the array is empty -->
         @forelse ($projects as $project)
@@ -26,5 +25,4 @@
         @endforelse
     </ul>
 
-</body>
-</html> 
+@endsection

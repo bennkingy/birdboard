@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-<title>Projects</title>
-
-</head>
-
-<body>
+// View extends layouts/app.blade.php
+@extends ('layout.app')
+@section('content')
 
     <h1> {{ $project->title }} </h1>
 
@@ -15,3 +8,5 @@
 
 </body>
 </html> 
+
+@endsection

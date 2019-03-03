@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-<title>Create Projects</title>
-
-</head>
-
-<body>
+// View extends layouts/app.blade.php
+@extends ('layout.app')
+@section('content')
 
     <form method="POST" action="/projects">
 
@@ -26,7 +19,12 @@
 
         <button type="submit"></button>
 
+        <!-- Back to projects -->
+        <a href="/projects">Cancel</a>
+
     </form>
 
 </body>
 </html> 
+
+@endsection
