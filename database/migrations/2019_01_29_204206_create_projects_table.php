@@ -19,6 +19,9 @@ class CreateProjectsTable extends Migration
             // Project table, id column
             $table->increments('id');
 
+            // Project table, id column
+            $table->unsignedInteger('owner_id');
+
             // Project table, title column
             $table->string('title');
 
@@ -27,6 +30,11 @@ class CreateProjectsTable extends Migration
 
             // Project table, timestamp column
             $table->timestamps();
+
+            // Project table, owner id column
+            // foreign() creates a key on owner_id that actually references the users id
+            // onDelete() removes all projects associated with the owner when the account is removed
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

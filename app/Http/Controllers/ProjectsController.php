@@ -24,8 +24,11 @@ class ProjectsController extends Controller
         // REFRACTOR - Validation
         $attributes = request()->validate([
             'title' => 'required',
-            'description' => 'required'
+            'description' => 'required',
         ]);
+        
+        // validation for owner id is done through middleware (which is safer)
+        $attributes['owner_id'] = auth()->id();
 
         // REFRACTOR - Persist/save data (save it to the DB)
         Project::create($attributes);

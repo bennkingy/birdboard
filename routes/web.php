@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::get('/projects', 'ProjectsController@index');
 
 // HTTP post request to store a new project into the DB
-Route::post('/projects', 'ProjectsController@store');
+Route::post('/projects', 'ProjectsController@store')->middleware('auth');
 
 // HTTP get request to fetch and show on the page a unique/single project from the DB
 Route::get('/projects/{project}', 'ProjectsController@show');
@@ -48,3 +48,7 @@ Route::get('/projects/{project}', 'ProjectsController@show');
 
 //     // Redirect page
 // });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

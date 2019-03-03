@@ -21,6 +21,10 @@ class ProjectsTest extends TestCase
     // Test to make sure a user can create a project
     public function a_user_can_create_a_project()
     {
+
+        // create a dummy user and set them to authenticated (signs them in)
+        $this->actingAs(factory('App\User')->create());
+        
         // Enable better debugging
         $this->withoutExceptionHandling();
 
@@ -49,9 +53,12 @@ class ProjectsTest extends TestCase
      *
      * TO RUN TEST: vendor/bin/phpunit --filter a_project_requires_a_title */
 
-    // Test to make sure that a created project has a title
+    // Test to make sure that a created project has a title (signs them in)
     public function a_project_requires_a_title()
     {
+        // create a dummy user and set them to authenticated
+        $this->actingAs(factory('App\User')->create());
+
         // Overide attributes to make title an empty string so a validation error occurs (this stops other validation issues conflicting with this test)
         $attributes = factory('App\Project')->raw(['title' => '']);
 
@@ -65,6 +72,9 @@ class ProjectsTest extends TestCase
     // Test to make sure that a created project has a description
     public function a_project_requires_a_description()
     {
+        // create a dummy user and set them to authenticated (signs them in)
+        $this->actingAs(factory('App\User')->create());
+
         // Overide attributes to make title an empty string so a validation error occurs
         $attributes = factory('App\Project')->raw(['description' => '']);
 
@@ -86,5 +96,19 @@ class ProjectsTest extends TestCase
         $this->get('/projects/' . $project->id)
             ->assertSee($project->title)
             ->assertSee($project->description);
+    }
+
+    /** @test
+     *
+     * TO RUN TEST: vendor/bin/phpunit --filter a_project_requires_a_owner */
+
+    // Test to make sure that a created project has an owner
+    public function only_authenticated_user_can_create_a_project()
+    {
+        // Overide attributes to make title an empty string so a validation error occurs
+        $attributes = factory('App\Project')->raw();
+
+        // If user is not authenticated then redirect them to the login page
+        $this->post('/projects', $attributes)->assertRedirect('login');
     }
 }
