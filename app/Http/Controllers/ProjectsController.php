@@ -28,10 +28,10 @@ class ProjectsController extends Controller
         ]);
         
         // validation for owner id is done through middleware (which is safer)
-        $attributes['owner_id'] = auth()->id();
+        auth()->user()->projects()->create($attributes);
 
         // REFRACTOR - Persist/save data (save it to the DB)
-        Project::create($attributes);
+        // Project::create($attributes);
 
         // // Validation
         // request()->validate(['title' => 'required', 'description' => 'required']); // Make sure the title field is enterd
@@ -49,12 +49,12 @@ class ProjectsController extends Controller
         return view('projects.show', compact('project'));
     }
     // // Fetch product from DB and direct user to that page - Refactored above
-    // public function show()
-    // {
-    //     // Fetch / find a single product equal to the project id from the url (check web.php)
-    //     $project = Project::findOrFail(request('project'));
+        // public function show()
+        // {
+        //     // Fetch / find a single product equal to the project id from the url (check web.php)
+        //     $project = Project::findOrFail(request('project'));
 
-    //     // Returns the projects show view
-    //     return view('projects.show', compact('project'));
-    // }
+        //     // Returns the projects show view
+        //     return view('projects.show', compact('project'));
+        // }
 }
