@@ -12,12 +12,8 @@ $factory->define(App\Project::class, function (Faker $faker) {
             'title' => $faker->sentence,
 
             'description' => $faker->paragraph,
-
-            'owner_id' => function () {
-                
-                // function to create dummy user and return the id
-                return factory(App\User::class)->create()->id;
-            }
-
+            
+            // Helper class to create dummy user and return the id
+            'owner_id' => factory(App\User::class)
     ];
 });
