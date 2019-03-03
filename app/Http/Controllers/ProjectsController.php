@@ -6,13 +6,18 @@ use App\Project;
 
 use Illuminate\Http\Request;
 
+// To play around in the terminal, run: php artisan tinker &&  factory('App\Project')->create();
+
 class ProjectsController extends Controller
 {
     // Direct user to the projects homepage and pass in any projects
     public function index()
     {
         // Fetch all products from database and save them into the $projects variable
-        $projects = Project::all();
+        // $projects = Project::all();
+
+        // Fetch all products for the signed in user
+        $projects = auth()->user()->projects;
 
         // Return projects view and pass in the $projects data to be used in the browser with compact()
         return view('projects.index', compact('projects'));
@@ -46,6 +51,11 @@ class ProjectsController extends Controller
     // Refractor of show method to use route model binding
     public function show(Project $project)
     {
+        // Ensure only the user can see only their projects
+        if (auth()->id() !== $project->owner_id) {
+            abort(403);
+        }
+
         return view('projects.show', compact('project'));
     }
     // // Fetch product from DB and direct user to that page - Refactored above

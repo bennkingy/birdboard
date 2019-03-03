@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// HTTP url request to projects page
-Route::get('/projects', 'ProjectsController@index');
+// HTTP url request to projects page, make sure user is signed in
+Route::get('/projects', 'ProjectsController@index')->middleware('auth');
 
 // HTTP post request to store a new project into the DB
 Route::post('/projects', 'ProjectsController@store')->middleware('auth');
