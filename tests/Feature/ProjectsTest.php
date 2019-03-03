@@ -89,8 +89,11 @@ class ProjectsTest extends TestCase
         // Enable better debugging
         $this->withoutExceptionHandling();
 
-        // Create a project using the factory class
-        $project = factory('App\Project')->create();
+        // Create signed in user
+        $this->be(factory('App\User')->create());
+
+        // Create a project using the factory class, with an authenicated user
+        $project = factory('App\Project')->create(['owner_id' => auth()->id()]);
 
         // If I make get request to fetch a proect make sure the project title and description is on the page
         $this->get('/projects/' . $project->id)
@@ -103,12 +106,33 @@ class ProjectsTest extends TestCase
      * TO RUN TEST: vendor/bin/phpunit --filter a_project_requires_a_owner */
 
     // Test to make sure that a created project has an owner
-    public function only_authenticated_user_can_create_a_project()
+    public function guests_cannot_create_projectst()
     {
         // Overide attributes to make title an empty string so a validation error occurs
         $attributes = factory('App\Project')->raw();
 
         // If user is not authenticated then redirect them to the login page
         $this->post('/projects', $attributes)->assertRedirect('login');
+    }
+
+    /** @test */
+
+    // Test to make sure that only authenticated users can view a project
+    public function guests_cannot_view_a_project()
+    {
+        // If user is not authenticated then redirect them to the login page
+        $this->get('/projects')->assertRedirect('login');
+    }
+
+    /** @test */
+
+    // Test to make sure that only authenticated users can view a project
+    public function guests_cannot_view_a_single_project()
+    {
+        // Creates a project using the factory class
+        $project = factory('App\Project')->create();
+
+        // If user is not authenticated then redirect them to the login page
+        $this->get($project->path())->assertRedirect('login');
     }
 }

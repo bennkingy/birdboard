@@ -51,10 +51,10 @@ class ProjectsController extends Controller
     // Refractor of show method to use route model binding
     public function show(Project $project)
     {
-        // Ensure only the user can see only their projects
-        if (auth()->id() !== $project->owner_id) {
-            abort(403);
-        }
+        // // Ensure only the user can see only their projects
+        // if (auth()->id() !== $project->owner_id) {
+        //     abort(403);
+        // }
 
         return view('projects.show', compact('project'));
     }

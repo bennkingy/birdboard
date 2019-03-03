@@ -25,7 +25,7 @@ Route::get('/projects', 'ProjectsController@index')->middleware('auth');
 Route::post('/projects', 'ProjectsController@store')->middleware('auth');
 
 // HTTP get request to fetch and show on the page a unique/single project from the DB
-Route::get('/projects/{project}', 'ProjectsController@show');
+Route::get('/projects/{project}', 'ProjectsController@show')->middleware('auth');
 
 // *** CREATED PROJECT CONTROLLER TO HANDLE THE HTTP REQUESTS BELOW - SEE ABOVE ^
 // // HTTP Get request - Respond to get request to fetch or show a project(s)
