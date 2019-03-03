@@ -18,14 +18,33 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// HTTP url request to projects page, make sure user is signed in
-Route::get('/projects', 'ProjectsController@index')->middleware('auth');
+Route::group(['middleware' => 'auth'], function () {
+    // // HTTP url request to projects page, make sure user is signed in
+    Route::get('/projects', 'ProjectsController@index');
 
-// HTTP post request to store a new project into the DB
-Route::post('/projects', 'ProjectsController@store')->middleware('auth');
+    // // HTTP url request to projects page, make sure user is signed in
+    Route::get('/projects/create', 'ProjectsController@create');
 
-// HTTP get request to fetch and show on the page a unique/single project from the DB
-Route::get('/projects/{project}', 'ProjectsController@show')->middleware('auth');
+    // HTTP post request to store a new project into the DB
+    Route::post('/projects', 'ProjectsController@store');
+
+    // HTTP get request to fetch and show on the page a unique/single project from the DB
+    Route::get('/projects/{project}', 'ProjectsController@show');
+
+    Route::get('/home', 'HomeController@index')->name('home');
+});
+
+// Login authentication routes
+Auth::routes();
+
+// // HTTP url request to projects page, make sure user is signed in
+// Route::get('/projects', 'ProjectsController@index')->middleware('auth');
+
+// // HTTP post request to store a new project into the DB
+// Route::post('/projects', 'ProjectsController@store')->middleware('auth');
+
+// // HTTP get request to fetch and show on the page a unique/single project from the DB
+// Route::get('/projects/{project}', 'ProjectsController@show')->middleware('auth');
 
 // *** CREATED PROJECT CONTROLLER TO HANDLE THE HTTP REQUESTS BELOW - SEE ABOVE ^
 // // HTTP Get request - Respond to get request to fetch or show a project(s)
@@ -48,7 +67,3 @@ Route::get('/projects/{project}', 'ProjectsController@show')->middleware('auth')
 
 //     // Redirect page
 // });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

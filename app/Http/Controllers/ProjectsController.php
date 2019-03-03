@@ -51,20 +51,26 @@ class ProjectsController extends Controller
     // Refractor of show method to use route model binding
     public function show(Project $project)
     {
-        // // Ensure only the user can see only their projects
-        // if (auth()->id() !== $project->owner_id) {
-        //     abort(403);
-        // }
+        // If the authenticated user is not the project owner, abort!
+        if (auth()->user()->isNot($project->owner)) {
+            abort(403);
+        }
 
         return view('projects.show', compact('project'));
     }
     // // Fetch product from DB and direct user to that page - Refactored above
-        // public function show()
-        // {
-        //     // Fetch / find a single product equal to the project id from the url (check web.php)
-        //     $project = Project::findOrFail(request('project'));
+    // public function show()
+    // {
+    //     // Fetch / find a single product equal to the project id from the url (check web.php)
+    //     $project = Project::findOrFail(request('project'));
 
-        //     // Returns the projects show view
-        //     return view('projects.show', compact('project'));
-        // }
+    //     // Returns the projects show view
+    //     return view('projects.show', compact('project'));
+    // }
+
+    public function create()
+    {
+        // create project and return page
+        return view('projects.create');
+    }
 }
