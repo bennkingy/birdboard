@@ -1,5 +1,5 @@
 // View extends layouts/app.blade.php
-@extends ('layout.app')
+@extends ('layouts.app')
 @section('content')
 
     <h1> {{ $project->title }} </h1>

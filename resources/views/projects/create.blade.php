@@ -1,23 +1,23 @@
 // View extends layouts/app.blade.php
-@extends ('layout.app')
+@extends ('layouts.app')
 @section('content')
 
     <form method="POST" action="/projects">
 
         @csrf
 
-        <h1> Create a project </h1>
+        <h1>Create a project</h1>
 
-        <label for="">
-            <input type="text" name="" id="">
+        <label for="title">
+            <input type="text" name="title" id="title">
         </label>
 
 
-        <label for="">
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+        <label for="description">
+            <textarea name="description" id="title" cols="30" rows="10"></textarea>
         </label>
 
-        <button type="submit"></button>
+        <button type="submit">Create</button>
 
         <!-- Back to projects -->
         <a href="/projects">Cancel</a>
