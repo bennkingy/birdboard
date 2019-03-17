@@ -71,7 +71,7 @@ class ProjectTasksTest extends TestCase
     public function a_task_can_be_updated()
     {
         $this->withExceptionHandling();
-        
+
         $this->signIn();
 
         $project = auth()->user()->projects()->create(
@@ -94,5 +94,22 @@ class ProjectTasksTest extends TestCase
             'completed' => true
 
         ]);
+    }
+    
+    /** @test */
+    // To run test: vendor/bin/phpunit --filter only_the_owner_of_a_project_may_update_a_task
+    public function only_the_owner_of_a_project_may_update_a_task()
+    {
+        $this->withExceptionHandling();
+
+        $this->signIn();
+
+        $project = factory('App\Project')->create();
+        $task = $project->addTask('test task');
+        
+        $this->post($project->path() . '/tasks' . $task->id, ['body' => 'changed'])
+            ->assertStatus(403);
+
+        $this->assertDatabaseMissing('tasks', ['body' => 'changed']);
     }
 }
