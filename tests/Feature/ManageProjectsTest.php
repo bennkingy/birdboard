@@ -25,7 +25,8 @@ class ProjectsTest extends TestCase
         $this->withoutExceptionHandling();
 
         // create a dummy user and set them to authenticated (signs them in)
-        $this->actingAs(factory('App\User')->create());
+        // $this->actingAs(factory('App\User')->create());
+        $this->signIn(); // refactor of above
 
         // create view/route should exist
         $this->get('/projects/create')->assertStatus(200);
