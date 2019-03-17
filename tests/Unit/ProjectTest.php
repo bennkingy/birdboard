@@ -27,4 +27,18 @@ class ProjectTest extends TestCase
 
         $this->assertInstanceOf('App\User', $project->owner);
     }
+
+    /** @test */
+
+    // To run test: vendor/bin/phpunit Unit/ProjectTest.php
+    public function it_can_add_a_task()
+    {
+        $project = factory('App\Project')->create();
+
+        $task = $project->addTask('Test task');
+        
+        $this->assertCount(1, $project->tasks);
+
+        $this->assertTrue($project->tasks->contains($task));
+    }
 }
