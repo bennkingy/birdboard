@@ -31,6 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
     // HTTP get request to fetch and show on the page a unique/single project from the DB
     Route::get('/projects/{project}', 'ProjectsController@show');
 
+    // HTTP post request to create new task
+    Route::post('/projects/{project)/tasks', 'ProjectTasksController@store');
+
     Route::get('/home', 'HomeController@index')->name('home');
 });
 

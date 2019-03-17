@@ -60,7 +60,8 @@ class ProjectsTest extends TestCase
     public function a_project_requires_a_title()
     {
         // create a dummy user and set them to authenticated
-        $this->actingAs(factory('App\User')->create());
+        //$this->actingAs(factory('App\User')->create());
+        $this->signIn(); // refactor of above
 
         // Overide attributes to make title an empty string so a validation error occurs (this stops other validation issues conflicting with this test)
         $attributes = factory('App\Project')->raw(['title' => '']);
@@ -76,7 +77,8 @@ class ProjectsTest extends TestCase
     public function a_project_requires_a_description()
     {
         // create a dummy user and set them to authenticated (signs them in)
-        $this->actingAs(factory('App\User')->create());
+        //$this->actingAs(factory('App\User')->create());
+        $this->signIn(); // refactor of above
 
         // Overide attributes to make title an empty string so a validation error occurs
         $attributes = factory('App\Project')->raw(['description' => '']);
@@ -93,8 +95,9 @@ class ProjectsTest extends TestCase
         $this->withoutExceptionHandling();
 
         // Create signed in user
-        $this->be(factory('App\User')->create());
-
+        //$this->be(factory('App\User')->create());
+        $this->signIn(); // refactor of above
+        
         // Create a project using the factory class, with an authenicated user
         $project = factory('App\Project')->create(['owner_id' => auth()->id()]);
 
