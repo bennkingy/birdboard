@@ -18,8 +18,8 @@ class ProjectTasksTest extends TestCase
 
         $this->signIn();
 
-        $project - auth()->user()->projects()->create(
-            factory(Project::class)->raw()
+        $project = auth()->user()->projects()->create(
+            factory(\App\Project::class)->raw()
         );
 
         $this->post($project->path() . '/tasks', ['body' => 'Test Task']);
@@ -57,12 +57,42 @@ class ProjectTasksTest extends TestCase
         $this->signIn(); // refactor of above
 
         $project = auth()->user()->projects()->create(
-            factory(Project::class)->raw()
+            factory(\App\Project::class)->raw()
         );
 
         // Overide attributes to make title an empty string so a validation error occurs
         $attributes = factory('App\Project')->raw(['body' => '']);
 
         $this->post($project->path() . '/tasks', $attributes)->assertSessionHasErrors('body');
+    }
+
+
+    /** @test */
+    public function a_task_can_be_updated()
+    {
+        $this->withExceptionHandling();
+        
+        $this->signIn();
+
+        $project = auth()->user()->projects()->create(
+            factory(\App\Project::class)->raw()
+        );
+
+        $task = $project->addTask('test task');
+
+        $this->patch($project->path() . '/tasks/' . $task->id, [
+
+            'body' => 'changed',
+
+            'completed' => true
+
+        ]);
+
+        $this->assertDatabaseHas('tasks', [
+
+            'body' => 'changed',
+            'completed' => true
+
+        ]);
     }
 }

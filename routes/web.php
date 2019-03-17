@@ -34,6 +34,9 @@ Route::group(['middleware' => 'auth'], function () {
     // HTTP post request to create new task
     Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
 
+    // HTTP patch request to update new task
+    Route::patch('/projects/{project}/tasks/{task}', 'ProjectTasksController@update');
+
     Route::get('/home', 'HomeController@index')->name('home');
 });
 

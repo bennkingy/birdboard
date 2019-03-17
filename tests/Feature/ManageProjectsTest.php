@@ -22,7 +22,7 @@ class ProjectsTest extends TestCase
     public function a_user_can_create_a_project()
     {
         // Enable better debugging
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
 
         // create a dummy user and set them to authenticated (signs them in)
         // $this->actingAs(factory('App\User')->create());
