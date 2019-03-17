@@ -6,7 +6,11 @@
 
         <div class="flex justify-between items-end w-full">
 
-            <h2 class="text-grey text-sm font-normal">My Projects</h2>
+            <p class="text-grey text-sm font-normal">
+
+            <a href="/projects" class="text-grey text-sm font-normal no-underline">My Projects</a> / {{ $project->title }}
+
+            </p>
 
             <a href="/projects/create" class="button bg-blue">Create project</a>
 
@@ -24,6 +28,9 @@
 
                     <!-- Tasks -->
                     <h2 class="text-grey font-normal text-lg mb-3">Tasks</h2>
+                    <div class="card mb-3">Lorem Ipsum.</div>
+                    <div class="card mb-3">Lorem Ipsum.</div>
+                    <div class="card mb-3">Lorem Ipsum.</div>
                     <div class="card">Lorem Ipsum.</div>
 
                 </div>
@@ -32,7 +39,7 @@
 
                     <!-- General Notes -->
                     <h2 class="text-grey font-normal text-lg mb-3">General Notes</h2>
-                    <div class="card">Lorem Ipsum.</div>
+                    <textarea class="card w-full" style="min-height: 200px;">Lorem Ipsum.</textarea>
 
                 </div>
 
@@ -40,15 +47,9 @@
 
             <div class="lg:w-1/4 px-3">
 
-                <div class="card">
+                @include ('projects.card')
 
-                    <h1 class="mb-3"> {{ $project->title }} </h1>
-
-                    <div> {{ $project->description }} </div>
-                    
-                    <a href="/projects">Go Back</a>
-
-                </div>
+                <a href="/projects">Go Back</a>
 
             </div>
 
