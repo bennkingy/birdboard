@@ -41,7 +41,7 @@
 
                                     <div class="flex">
 
-                                        <input name="body" value="{{ $task->body }}" class="w-full">
+                                        <input name="body" value="{{ $task->body }}" class="w-full {{ $task->completed ? 'border-l-4 border-green' : 'border-l-4 border-red' }}">
 
                                         <input name="completed" type="checkbox" onChange="this.form.submit()" {{ $task->completed ? 'checked' : '' }}>
 
