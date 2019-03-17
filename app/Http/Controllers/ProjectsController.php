@@ -33,7 +33,7 @@ class ProjectsController extends Controller
         ]);
         
         // validation for owner id is done through middleware (which is safer)
-        auth()->user()->projects()->create($attributes);
+        $project = auth()->user()->projects()->create($attributes);
 
         // REFRACTOR - Persist/save data (save it to the DB)
         // Project::create($attributes);
@@ -45,7 +45,7 @@ class ProjectsController extends Controller
         // Project::create(request(['title', 'description'])); // Fetch data from Project Model
 
         // Redirect page
-        return redirect('/projects');
+        return redirect($project->path());
     }
 
     // Refractor of show method to use route model binding
