@@ -29,9 +29,13 @@
 
                 <div class="flex justify-between items-center py-2">
 
+                    <h1>
+                        
                         <a class="navbar-brand" href="{{ url('/projects') }}">
                             <img src="/images/logo.svg" alt="Birdboard" class="relative" style="top: 2px">
                         </a>
+
+                    </h1>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

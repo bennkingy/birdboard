@@ -1,4 +1,4 @@
-// View extends layouts/app.blade.php
+{{-- View extends layouts/app.blade.php --}}
 @extends ('layouts.app')
 @section('content')
 

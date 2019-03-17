@@ -60,15 +60,7 @@
   * @import "utilities/background-patterns";
   * @import "utilities/skew-transforms";
   */
-  .button {
 
-    // @apply allows use of styles from other css classes!
-    @apply .bg-blue .text-white .no-underline .rounded-lg .text-sm .py-2 .px-5 ;
-
-    box-shadow: 0 2px 7px 0 #b0eaff;  
-
-  }
- 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -77,6 +69,23 @@
 
 // Bootstrap
 // @import '~bootstrap/scss/bootstrap';
+
+.section {
+  @apply .px-4;
+}
+
+.button {
+
+  // @apply allows use of styles from other css classes!
+  @apply .bg-blue .text-white .no-underline .rounded-lg .text-sm .py-2 .px-5;
+
+  box-shadow: 0 2px 7px 0 #b0eaff;  
+
+}
+
+.card {
+  @apply .bg-white .rounded-lg .shadow .p-5;
+}
 
 .navbar-laravel {
   background-color: #fff;
