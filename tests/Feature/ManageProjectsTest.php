@@ -22,7 +22,7 @@ class ProjectsTest extends TestCase
     public function a_user_can_create_a_project()
     {
         // Enable better debugging
-        //$this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         // create a dummy user and set them to authenticated (signs them in)
         // $this->actingAs(factory('App\User')->create());
@@ -42,8 +42,13 @@ class ProjectsTest extends TestCase
 
         ];
 
-        // Post request to create a project with the data and then redirect a user to a page
-        $this->post('/projects', $attributes)->assertRedirect('/projects');
+        // // Post request to create a project with the data and then redirect a user to a page
+        // $this->post('/projects', $attributes)->assertRedirect('/projects');
+        $response = $this->post('/projects', $attributes);
+
+        $project = Project::where($attributes)->first();
+
+        $response->assertRedirect($project->path());
 
         // Make sure that database has a table called projects and can accept the data
         $this->assertDatabaseHas('projects', $attributes);

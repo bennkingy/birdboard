@@ -33,7 +33,7 @@
 
                         <div class="card mb-3">
 
-                            <form method="POST" action="{{ $project->path() . '/tasks/' . $task->id }}">
+                            <form method="POST" action="{{ $task->path() }}">
 
                                     @method('PATCH')
 
