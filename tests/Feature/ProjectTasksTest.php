@@ -107,7 +107,7 @@ class ProjectTasksTest extends TestCase
         $project = factory('App\Project')->create();
         $task = $project->addTask('test task');
         
-        $this->post($project->path() . '/tasks' . $task->id, ['body' => 'changed'])
+        $this->patch($task->path(), ['body' => 'changed'])
             ->assertStatus(403);
 
         $this->assertDatabaseMissing('tasks', ['body' => 'changed']);
