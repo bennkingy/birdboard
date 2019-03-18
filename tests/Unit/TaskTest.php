@@ -14,7 +14,7 @@ class TaskTest extends TestCase
     public function it_belongs_to_a_project()
     {
         $task = factory(Task::class)->create();
-
+        
         $this->assertInstanceOf(Project::class, $task->project);
     }
 
