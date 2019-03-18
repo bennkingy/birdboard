@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Project;
+
 use Tests\TestCase;
 
 // WithFaker library for dummy text (name, sentence, etc)
